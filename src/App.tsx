@@ -15,7 +15,7 @@ export default function App() {
 				<DataProvider>
 					<MetaMaskProvider debug={false} sdkOptions={{
 						logging: {
-							developerMode: false,
+							developerMode: true,
 						},
 						communicationServerUrl: process.env.REACT_APP_COMM_SERVER_URL,
 						dappMetadata: {

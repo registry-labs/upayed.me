@@ -19,8 +19,8 @@ interface IDataProvider {
 }
 
 export const DataContext = createContext<IDataProvider>({
-	setSelectedToken: () => {},
-	setSelectedWallet: () => {},
+	setSelectedToken: () => { },
+	setSelectedWallet: () => { },
 	getTokensFromFiat: () => ''
 });
 

@@ -1,9 +1,7 @@
 import { requestTransfer } from '@nfid/wallet';
 import { decimalsToE8s } from './validationHelper';
 import { useSDK } from '@metamask/sdk-react';
-import { Address } from '@the-registry/tir';
 
-const { sdk, connected, connecting, provider, chainId } = useSDK();
 
 
 // ICP
@@ -37,26 +35,30 @@ export async function handleStoicTransaction(to: string, amount: string) {
 
 // ETH
 export async function handleMetamaskTransaction(to: string, amount: string) {
-	if (window.ethereum) {
-		const eth = window.ethereum;
-		const accounts = await sdk?.connect();
-		if (accounts != null || accounts != undefined) {
-			let currentAccount: string = (accounts as any)[0];
-			eth.request({
-				method: 'eth_sendTransaction',
-				params: [
-					{
-						from: currentAccount,
-						to: to,
-						value: amount,
-						gasLimit: '0x5028',
-						maxPriorityFeePerGas: '0x3b9aca00',
-						maxFeePerGas: '0x2540be400',
-					},
-				],
-			})
-				.then((txHash: unknown) => console.log(txHash))
-				.catch((error: Error) => console.error(error));
-		}
-	}
+	// const mm = (window as any).metamask;
+	// console.log(mm);
+	// if (mm != undefined) {
+	console.log('requesting..connect');
+	const eth = window.ethereum;
+	const accounts = await useSDK().sdk?.connect();
+	console.log(accounts);
+	// if (accounts != null || accounts != undefined) {
+	// 	let currentAccount: string = (accounts as any)[0];
+	// 	mm.request({
+	// 		method: 'eth_sendTransaction',
+	// 		params: [
+	// 			{
+	// 				from: currentAccount,
+	// 				to: to,
+	// 				value: amount,
+	// 				gasLimit: '0x5028',
+	// 				maxPriorityFeePerGas: '0x3b9aca00',
+	// 				maxFeePerGas: '0x2540be400',
+	// 			},
+	// 		],
+	// 	})
+	// 		.then((txHash: unknown) => console.log(txHash))
+	// 		.catch((error: Error) => console.error(error));
+	// }
+	// }
 }
