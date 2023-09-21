@@ -1,0 +1,128 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "prettier"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint",
+        "prettier",
+        "unused-imports"
+    ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "rules": {
+        "prettier/prettier": [
+            "error"
+        ],
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-member-accessibility": [
+            "off",
+            {
+                "accessibility": "explicit"
+            }
+        ],
+        "prefer-arrow/prefer-arrow-functions": [
+            "off"
+        ],
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/naming-convention": [
+            "warn",
+            {
+                "selector": "enum",
+                "format": [
+                    "snake_case",
+                    "camelCase",
+                    "PascalCase"
+                ]
+            }
+        ],
+        "brace-style": [
+            "off",
+            "off"
+        ],
+        "import/order": "off",
+        "max-len": [
+            "error",
+            {
+                "ignorePattern": "^import |^export | implements",
+                "code": 200
+            }
+        ],
+        "no-underscore-dangle": "off",
+        "object-shorthand": "off",
+        "quote-props": [
+            "error",
+            "as-needed"
+        ],
+        "quotes": [
+            "error",
+            "single",
+            {
+                "avoidEscape": true
+            }
+        ],
+        "arrow-parens": [
+            "error",
+            "as-needed"
+        ],
+        "comma-dangle": [
+            "error",
+            "only-multiline"
+        ],
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": [
+            "off"
+        ],
+        "indent": [
+            1,
+            "tab",
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "function-paren-newline": [
+            "error",
+            "consistent"
+        ],
+        "function-call-argument-newline": [
+            "error",
+            "consistent"
+        ],
+        "array-element-newline": [
+            "error",
+            {
+                "ArrayExpression": "consistent",
+                "ArrayPattern": {
+                    "minItems": 4
+                }
+            }
+        ],
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+            "warn",
+            {
+                "vars": "all",
+                "varsIgnorePattern": "^_",
+                "args": "after-used",
+                "argsIgnorePattern": "^_"
+            }
+        ]
+    }
+}

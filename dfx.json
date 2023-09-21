@@ -1,0 +1,21 @@
+{
+  "canisters": {
+    "upayed": {
+      "frontend": {
+        "entrypoint": "src/index.html"
+      },
+      "source": [
+        "src/assets",
+        "dist/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "version": 1
+}

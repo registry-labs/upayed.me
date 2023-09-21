@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="title" content="upayed.me" />
+		<meta name="description" content="One-stop multichain payment solution" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+		<meta name="theme-color" content="#191919" />
+		<title id="dynamicTitle">Upayed.me</title>
+	</head>
+	<body>
+		<noscript>You need to enable JavaScript to run this app.</noscript>
+		<div id="root"></div>
+		<script>
+			// Get the query parameters from the URL
+			const urlParams = new URLSearchParams(window.location.search);
+			const logoUrl = urlParams.get('logo');
+			const name = urlParams.get('name');
+			const amount = urlParams.get('amount');
+			const currency = urlParams.get('currency');
+
+			if (name) {
+				document.getElementById('dynamicTitle').textContent = `Payment request from ${name} | upayed.me`;
+
+				const titleMeta = document.createElement('meta');
+				titleMeta.setAttribute('property', 'og:title');
+				titleMeta.setAttribute('content', `Payment request from ${name} | upayed.me`);
+				document.head.appendChild(titleMeta);
+
+				const ogTitleMeta = document.createElement('meta');
+				ogTitleMeta.setAttribute('property', 'og:title');
+				ogTitleMeta.setAttribute('content', `Payment request from ${name} | upayed.me`);
+				document.head.appendChild(ogTitleMeta);
+
+				if (amount && currency) {
+					const descriptionMeta = document.createElement('meta');
+					descriptionMeta.setAttribute('property', 'description');
+					descriptionMeta.setAttribute('content', `${name} requested a payment of ${currency} ${amount}. You can directly pay using the link`);
+					document.head.appendChild(descriptionMeta);
+
+					const ogDescriptionMeta = document.createElement('meta');
+					ogDescriptionMeta.setAttribute('property', 'og:description');
+					ogDescriptionMeta.setAttribute('content', `${name} requested a payment of ${currency} ${amount}. You can directly pay using the link`);
+					document.head.appendChild(ogDescriptionMeta);
+				}
+			}
+
+			const ogUrl = document.createElement('meta');
+			ogUrl.setAttribute('property', 'og:url');
+			ogUrl.setAttribute('content', window.location.href);
+			document.head.appendChild(ogUrl);
+
+			if (logoUrl) {
+				// Create a new meta tag
+				const imageTag = document.createElement('meta');
+				imageTag.setAttribute('property', 'og:image');
+				imageTag.setAttribute('content', logoUrl);
+
+				// Add the meta tag to the head of the document
+				document.head.appendChild(imageTag);
+			}
+		</script>
+	</body>
+</html>

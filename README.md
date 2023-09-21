@@ -1,0 +1,1 @@
+the_identity_registry frontend
