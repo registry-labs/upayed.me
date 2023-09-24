@@ -83,7 +83,14 @@ export default function DataProvider({ children }: PropsWithChildren) {
 
 	// MOCK METHOD!
 	function getTokensFromFiat(chain: string) {
-		const price = chain === 'icp' ? 3.01 : 27000.0;
+		var price = 0;
+		if (chain === "icp") {
+			price = 3.01;
+		} else if (chain === "eth") {
+			price = 1400;
+		} else if (chain === "btc") {
+			price = 27000;
+		}
 		const tokens = parseFloat(amount ?? '0') / price;
 		return tokens.toFixed(5);
 	}
