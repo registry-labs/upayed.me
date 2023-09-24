@@ -1,13 +1,8 @@
 import React from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useData } from 'src/context/DataProvider';
 
-interface IProps {
-    txId: string;
-    message: string;
-}
-
-export default function TransactionResult({ txId, message }: IProps) {
-    // const history = useHistory();
+export default function TransactionResult() {
+    const { transferResult, txnHash } = useData()
 
     const handleRedirect = () => {
         // history.push('/');
@@ -16,9 +11,8 @@ export default function TransactionResult({ txId, message }: IProps) {
 
     return (
         <div>
-            <p>{message}</p>
-            <p>Transaction ID: {txId}</p>
-            <button onClick={handleRedirect}>Go Back</button>
+            <p> {transferResult === "ok" ? "Transection Successful" : "Transection Failed"}</p>
+            <p>Transection Details {txnHash}</p>
         </div>
     );
 }

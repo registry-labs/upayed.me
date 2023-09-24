@@ -21,10 +21,12 @@ export async function handlePlugTransaction(to: string, amount: string) {
 	};
 	const result = await plug.requestTransfer(params);
 	console.log(result);
+	return result;
 }
 
 export async function handleNfidTransaction(to: string, amount: string) {
-	await requestTransfer({ amount: Number(amount), to });
+	var res = await requestTransfer({ amount: Number(amount), to });
+	return res.status;
 }
 
 export async function handleStoicTransaction(to: string, amount: string) {
@@ -54,18 +56,20 @@ export async function handleMetamaskTransaction(to: string, amount: string) {
 					'0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
 			},
 		];
-		window.ethereum
+		await window.ethereum
 			?.request({
 				method: 'eth_sendTransaction',
 				params: params,
 			})
 			.then((result) => {
 				console.log(result);
+				return result;
 				// The result varies by RPC method.
 				// For example, this method returns a transaction hash hexadecimal string upon success.
 			})
 			.catch((error) => {
 				console.log(error);
+				return "err : " + error;
 				// If the request fails, the Promise rejects with an error.
 			});
 	}
@@ -89,26 +93,28 @@ function parseUnits(value: string, unit: string): bigint {
 }
 
 
-	// console.log('requesting..connect');
-	// const eth = window.ethereum;
-	// const accounts = await useSDK().sdk?.connect();
-	// console.log(accounts);
-	// if (accounts != null || accounts != undefined) {
-	// 	let currentAccount: string = (accounts as any)[0];
-	// 	mm.request({
-	// 		method: 'eth_sendTransaction',
-	// 		params: [
-	// 			{
-	// 				from: currentAccount,
-	// 				to: to,
-	// 				value: amount,
-	// 				gasLimit: '0x5028',
-	// 				maxPriorityFeePerGas: '0x3b9aca00',
-	// 				maxFeePerGas: '0x2540be400',
-	// 			},
-	// 		],
-	// 	})
-	// 		.then((txHash: unknown) => console.log(txHash))
-	// 		.catch((error: Error) => console.error(error));
-	// }
-	// }
+// console.log('requesting..connect');
+// const eth = window.ethereum;
+// const accounts = await useSDK().sdk?.connect();
+// console.log(accounts);
+// if (accounts != null || accounts != undefined) {
+// 	let currentAccount: string = (accounts as any)[0];
+// 	mm.request({
+// 		method: 'eth_sendTransaction',
+// 		params: [
+// 			{
+// 				from: currentAccount,
+// 				to: to,
+// 				value: amount,
+// 				gasLimit: '0x5028',
+// 				maxPriorityFeePerGas: '0x3b9aca00',
+// 				maxFeePerGas: '0x2540be400',
+// 			},
+// 		],
+// 	})
+// 		.then((txHash: unknown) => console.log(txHash))
+// 		.catch((error: Error) => console.error(error));
+// }
+// }
+
+
