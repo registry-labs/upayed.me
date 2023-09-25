@@ -6,13 +6,12 @@ import metamask from 'src/assets/images/wallets/metamask.png';
 import coinbase from 'src/assets/images/wallets/coinbase.png';
 import ledger from 'src/assets/images/wallets/ledger.png';
 import trezor from 'src/assets/images/wallets/trezor.png';
-import trust from 'src/assets/images/wallets/trust.png';
-import { handleMetamaskTransaction, handleNfidTransaction, handlePlugTransaction, handleStoicTransaction } from '@helpers/transactionHelper';
+import { handleMetamaskTransaction, handleNfidTransaction, handlePlugTransaction } from '@helpers/transactionHelper';
 
 export interface Wallet {
 	name: string;
 	logo: string;
-	handleTransaction: (to: string, amount: string) => Promise<void>;
+	handleTransaction: (to: string, amount: string) => Promise<string>;
 }
 
 interface ChainWallets {
@@ -28,17 +27,17 @@ export const wallets: ChainWallets[] = [
 				name: 'MetaMask',
 				logo: metamask,
 				handleTransaction: handleMetamaskTransaction
-			},
-			{
-				name: 'Trust Wallet',
-				logo: trust,
-				handleTransaction: async (to: string, amount: string) => console.log('trust')
-			},
-			{
-				name: 'Coinbase Wallet',
-				logo: coinbase,
-				handleTransaction: async (to: string, amount: string) => console.log('coinbase')
 			}
+			// {
+			// 	name: 'Trust Wallet',
+			// 	logo: trust,
+			// 	handleTransaction: async (to: string, amount: string) => console.log('trust')
+			// },
+			// {
+			// 	name: 'Coinbase Wallet',
+			// 	logo: coinbase,
+			// 	handleTransaction: async (to: string, amount: string) => console.log('coinbase')
+			// }
 		]
 	},
 	{
@@ -47,17 +46,17 @@ export const wallets: ChainWallets[] = [
 			{
 				name: 'Ledger',
 				logo: ledger,
-				handleTransaction: async (to: string, amount: string) => console.log('ledger')
+				handleTransaction: async (to: string, amount: string) => 'ledger NOT IMPLEMENTED'
 			},
 			{
 				name: 'Trezor',
 				logo: trezor,
-				handleTransaction: async (to: string, amount: string) => console.log('trezor')
+				handleTransaction: async (to: string, amount: string) => 'trezor NOT IMPLEMENTED'
 			},
 			{
 				name: 'Coinbase Wallet',
 				logo: coinbase,
-				handleTransaction: async (to: string, amount: string) => console.log('coinbase')
+				handleTransaction: async (to: string, amount: string) => 'coinbase NOT IMPLEMENTED'
 			}
 		]
 	},

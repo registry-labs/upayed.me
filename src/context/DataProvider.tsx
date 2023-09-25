@@ -10,6 +10,7 @@ interface IDataProvider {
 	currency?: string | null;
 	currencySymbol?: string | null;
 	logo?: string | null;
+	callbackUrl?: string | null;
 	paymentInformation?: PaymentInformation;
 	selectedToken?: string;
 	setSelectedToken: (chain: string) => void;
@@ -31,6 +32,8 @@ export default function DataProvider({ children }: PropsWithChildren) {
 	const [amount, setAmount] = useState<string | null>(null);
 	const [currency, setCurrency] = useState<string | null>(null);
 	const [logo, setLogo] = useState<string | null>(null);
+	const [callbackUrl, setCallbackUrl] = useState<string | null>(null);
+
 	const [selectedToken, setSelectedToken] = useState<string | undefined>(undefined);
 	const [selectedWallet, setSelectedWallet] = useState<Wallet | undefined>(undefined);
 	const { search: urlSearch } = useLocation();
@@ -48,6 +51,7 @@ export default function DataProvider({ children }: PropsWithChildren) {
 			setAmount(search.get('amount'));
 			setCurrency(search.get('currency'));
 			setLogo(search.get('logo'));
+			setCallbackUrl(search.get('callbackUrl'));
 
 			const data = await getPaymentInformation(address);
 			setPaymentInformation(data);
@@ -97,6 +101,7 @@ export default function DataProvider({ children }: PropsWithChildren) {
 				currency,
 				currencySymbol: getCurrencySymbol(),
 				logo,
+				callbackUrl,
 				paymentInformation,
 				setSelectedToken,
 				selectedToken,
