@@ -10,7 +10,7 @@ import { useData } from 'src/context/DataProvider';
 import { CryptoAddressDetails } from '@the-registry/tir';
 
 export default function WalletSelect() {
-	const { paymentInformation, selectedToken, getTokensFromFiat, selectedWallet, callbackUrl } = useData();
+	const { paymentInformation, selectedToken, getTokensFromFiat, selectedWallet, callbackUrl, memo } = useData();
 	const [error, setError] = useState<string | null>(null);
 
 	function getAddress() {
@@ -23,7 +23,7 @@ export default function WalletSelect() {
 			setError(null);
 			if (selectedToken && selectedWallet) {
 				const result = await selectedWallet.handleTransaction(getAddress(), getTokensFromFiat(selectedToken));
-				window.location.replace(`${callbackUrl}?blockheight=${result}`);
+				window.location.replace(`${callbackUrl}?blockheight=${result}&memo=${memo}`);
 			}
 		} catch (error) {
 			setError('Transaction failed, please try again.');

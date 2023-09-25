@@ -11,6 +11,7 @@ interface IDataProvider {
 	currencySymbol?: string | null;
 	logo?: string | null;
 	callbackUrl?: string | null;
+	memo?: string | null;
 	paymentInformation?: PaymentInformation;
 	selectedToken?: string;
 	setSelectedToken: (chain: string) => void;
@@ -32,6 +33,7 @@ export default function DataProvider({ children }: PropsWithChildren) {
 	const [amount, setAmount] = useState<string | null>(null);
 	const [currency, setCurrency] = useState<string | null>(null);
 	const [logo, setLogo] = useState<string | null>(null);
+	const [memo, setMemo] = useState<string | null>(null);
 	const [callbackUrl, setCallbackUrl] = useState<string | null>(null);
 
 	const [selectedToken, setSelectedToken] = useState<string | undefined>(undefined);
@@ -52,6 +54,7 @@ export default function DataProvider({ children }: PropsWithChildren) {
 			setCurrency(search.get('currency'));
 			setLogo(search.get('logo'));
 			setCallbackUrl(search.get('callbackUrl'));
+			setMemo(search.get('memo'));
 
 			const data = await getPaymentInformation(address);
 			setPaymentInformation(data);
@@ -87,7 +90,13 @@ export default function DataProvider({ children }: PropsWithChildren) {
 
 	// MOCK METHOD!
 	function getTokensFromFiat(chain: string) {
-		const price = chain === 'icp' ? 3.01 : 27000.0;
+		let price = 3.01;
+		if (chain === 'eth') {
+			price = 16000.0;
+		}
+		if (chain == 'btc') {
+			price = 27000.0;
+		}
 		const tokens = parseFloat(amount ?? '0') / price;
 		return tokens.toFixed(5);
 	}
@@ -102,6 +111,7 @@ export default function DataProvider({ children }: PropsWithChildren) {
 				currencySymbol: getCurrencySymbol(),
 				logo,
 				callbackUrl,
+				memo,
 				paymentInformation,
 				setSelectedToken,
 				selectedToken,

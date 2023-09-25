@@ -1,6 +1,6 @@
 import { AppBar, IconButton, Stack } from '@mui/material';
 import React from 'react';
-import logo from '@assets/images/logo.svg';
+import logo from '@assets/images/logo_large.svg';
 import { ArrowLeft } from '@assets/icons/Icons';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,6 +1,5 @@
 import { requestTransfer } from '@nfid/wallet';
 import { decimalsToE8s } from './validationHelper';
-import detectEthereumProvider from '@metamask/detect-provider';
 
 // ICP
 export async function handlePlugTransaction(to: string, amount: string) {

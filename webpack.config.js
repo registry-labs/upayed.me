@@ -69,11 +69,11 @@ module.exports = {
 					from: `src/.ic-assets.json*`,
 					to: '.ic-assets.json5',
 					noErrorOnMissing: true
+				},
+				{
+					from: `src/assets/images/logo.svg`,
+					to: 'logo.svg'
 				}
-				// {
-				// 	from: `src/assets/images/logo_primary.svg`,
-				// 	to: 'logo.svg'
-				// },
 				// {
 				// 	from: `src/assets/misc`,
 				// 	to: ''

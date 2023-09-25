@@ -7,13 +7,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
 		<meta name="theme-color" content="#191919" />
-		<title id="dynamicTitle">Upayed.me</title>
+		<title id="dynamicTitle">upayed.me</title>
+		<link rel="apple-touch-icon" sizes="180x180" href="/logo.svg" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/logo.svg" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/logo.svg" />
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+		<meta name="msapplication-TileColor" content="#ffffff" />
+		<meta name="theme-color" content="#ffffff" />
 	</head>
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
 		<div id="root"></div>
 		<script>
-			// Get the query parameters from the URL
 			const urlParams = new URLSearchParams(window.location.search);
 			const logoUrl = urlParams.get('logo');
 			const name = urlParams.get('name');
@@ -21,16 +26,16 @@
 			const currency = urlParams.get('currency');
 
 			if (name) {
-				document.getElementById('dynamicTitle').textContent = `Payment request from ${name} | upayed.me`;
+				document.getElementById('dynamicTitle').textContent = `upayed.me | ${name}`;
 
 				const titleMeta = document.createElement('meta');
 				titleMeta.setAttribute('property', 'og:title');
-				titleMeta.setAttribute('content', `Payment request from ${name} | upayed.me`);
+				titleMeta.setAttribute('content', `upayed.me | ${name}`);
 				document.head.appendChild(titleMeta);
 
 				const ogTitleMeta = document.createElement('meta');
 				ogTitleMeta.setAttribute('property', 'og:title');
-				ogTitleMeta.setAttribute('content', `Payment request from ${name} | upayed.me`);
+				ogTitleMeta.setAttribute('content', `upayed.me | ${name}`);
 				document.head.appendChild(ogTitleMeta);
 
 				if (amount && currency) {
