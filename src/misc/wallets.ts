@@ -12,7 +12,7 @@ import { handleMetamaskTransaction, handleNfidTransaction, handlePlugTransaction
 export interface Wallet {
 	name: string;
 	logo: string;
-	handleTransaction: (to: string, amount: string) => Promise<void>;
+	handleTransaction: (to: string, amount: string) => Promise<String>;
 }
 
 interface ChainWallets {
@@ -32,12 +32,12 @@ export const wallets: ChainWallets[] = [
 			{
 				name: 'Trust Wallet',
 				logo: trust,
-				handleTransaction: async (to: string, amount: string) => console.log('trust')
+				handleTransaction: async (to: string, amount: string) => { console.log('trust'); return "Err: Not yet implemented" }
 			},
 			{
 				name: 'Coinbase Wallet',
 				logo: coinbase,
-				handleTransaction: async (to: string, amount: string) => console.log('coinbase')
+				handleTransaction: async (to: string, amount: string) => { console.log('coinbase'); return "Err: Not yet implemented" }
 			}
 		]
 	},
@@ -47,17 +47,17 @@ export const wallets: ChainWallets[] = [
 			{
 				name: 'Ledger',
 				logo: ledger,
-				handleTransaction: async (to: string, amount: string) => console.log('ledger')
+				handleTransaction: async (to: string, amount: string) => { console.log('ledger'); return "Err: Not yet implemented" }
 			},
 			{
 				name: 'Trezor',
 				logo: trezor,
-				handleTransaction: async (to: string, amount: string) => console.log('trezor')
+				handleTransaction: async (to: string, amount: string) => { console.log('trezor'); return "Err: Not yet implemented" }
 			},
 			{
 				name: 'Coinbase Wallet',
 				logo: coinbase,
-				handleTransaction: async (to: string, amount: string) => console.log('coinbase')
+				handleTransaction: async (to: string, amount: string) => { console.log('coinbase'); return "Err: Not yet implemented" }
 			}
 		]
 	},

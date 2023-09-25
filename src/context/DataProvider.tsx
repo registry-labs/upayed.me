@@ -10,18 +10,23 @@ interface IDataProvider {
 	currency?: string | null;
 	currencySymbol?: string | null;
 	logo?: string | null;
+	redirectUrl?: string | null;
 	paymentInformation?: PaymentInformation;
 	selectedToken?: string;
 	setSelectedToken: (chain: string) => void;
 	selectedWallet?: Wallet;
 	setSelectedWallet: (wallet: Wallet) => void;
 	getTokensFromFiat: (chain: string) => string;
+	setResult: (res: string, hash: string) => void;
+	transferResult?: string;
+	txnHash?: string;
 }
 
 export const DataContext = createContext<IDataProvider>({
-	setSelectedToken: () => {},
-	setSelectedWallet: () => {},
-	getTokensFromFiat: () => ''
+	setSelectedToken: () => { },
+	setSelectedWallet: () => { },
+	getTokensFromFiat: () => '',
+	setResult: () => { },
 });
 
 export default function DataProvider({ children }: PropsWithChildren) {
@@ -31,9 +36,12 @@ export default function DataProvider({ children }: PropsWithChildren) {
 	const [amount, setAmount] = useState<string | null>(null);
 	const [currency, setCurrency] = useState<string | null>(null);
 	const [logo, setLogo] = useState<string | null>(null);
+	const [redirect, setRedirect] = useState<string | null>(null);
 	const [selectedToken, setSelectedToken] = useState<string | undefined>(undefined);
 	const [selectedWallet, setSelectedWallet] = useState<Wallet | undefined>(undefined);
 	const { search: urlSearch } = useLocation();
+	const [transferResult, setTransferResult] = useState<string | undefined>(undefined);
+	const [txnHash, setTxnHash] = useState<string | undefined>(undefined);
 
 	useEffect(() => {
 		initialize();
@@ -48,7 +56,7 @@ export default function DataProvider({ children }: PropsWithChildren) {
 			setAmount(search.get('amount'));
 			setCurrency(search.get('currency'));
 			setLogo(search.get('logo'));
-
+			setRedirect(search.get('redirectUrl'));
 			const data = await getPaymentInformation(address);
 			setPaymentInformation(data);
 		} catch (error) {
@@ -83,9 +91,21 @@ export default function DataProvider({ children }: PropsWithChildren) {
 
 	// MOCK METHOD!
 	function getTokensFromFiat(chain: string) {
-		const price = chain === 'icp' ? 3.01 : 27000.0;
+		var price = 0;
+		if (chain === "icp") {
+			price = 3.01;
+		} else if (chain === "eth") {
+			price = 1400;
+		} else if (chain === "btc") {
+			price = 27000;
+		}
 		const tokens = parseFloat(amount ?? '0') / price;
 		return tokens.toFixed(5);
+	}
+
+	async function setResult(res: string, hash: string) {
+		setTransferResult(res);
+		setTxnHash(hash);
 	}
 
 	return (
@@ -102,7 +122,13 @@ export default function DataProvider({ children }: PropsWithChildren) {
 				selectedToken,
 				selectedWallet,
 				setSelectedWallet,
-				getTokensFromFiat
+				getTokensFromFiat,
+				redirectUrl: redirect,
+				transferResult,
+				txnHash,
+				setResult,
+				// setTransferResult,
+				// setResult,
 			}}>
 			{children}
 		</DataContext.Provider>

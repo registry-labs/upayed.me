@@ -11,12 +11,26 @@ import { CryptoAddressDetails } from '@the-registry/tir';
 import { getAddress } from '@helpers/payStringHelper';
 
 export default function WalletSelect() {
-	const { paymentInformation, selectedToken, getTokensFromFiat, selectedWallet } = useData();
+	const { paymentInformation, selectedToken, getTokensFromFiat, selectedWallet, redirectUrl, setResult } = useData();
 
 	function getAddress() {
 		const address = paymentInformation?.addresses.find(address => address.paymentNetwork === selectedToken);
 		return (address?.addressDetails as CryptoAddressDetails).address ?? '';
 	}
+
+	async function redirectAfterTransaction() {
+		try {
+			const token = selectedToken ?? 'icp';
+			const blockHeight = await selectedWallet?.handleTransaction(getAddress(), getTokensFromFiat(token));
+			setResult('ok', blockHeight?.toString() ?? '');
+			window.location.replace(`res`);
+		} catch (error) {
+			setResult('err', "");
+			console.log(error);
+		}
+	}
+
+
 	return (
 		<Stack justifyContent='space-between' direction='column' height='100%'>
 			<Stack spacing={2} pb={2} direction='column'>
@@ -25,7 +39,7 @@ export default function WalletSelect() {
 				<PayWith />
 				<WalletOptionsList />
 			</Stack>
-			<Button variant='contained' onClick={() => selectedToken && selectedWallet?.handleTransaction(getAddress(), getTokensFromFiat(selectedToken))}>
+			<Button variant='contained' onClick={() => selectedToken && redirectAfterTransaction()}>
 				Pay
 			</Button>
 		</Stack>

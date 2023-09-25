@@ -1,4 +1,5 @@
 import WalletSelect from '@modules/WalletSelect/WalletSelect';
+import Result from '@modules/res/result';
 import { Typography } from '@mui/material';
 import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
@@ -17,6 +18,7 @@ export default function Router() {
 			<Routes>
 				<Route path='/' element={<TokenSelect />} />
 				<Route path='/transfer' element={<WalletSelect />} />
+				<Route path='/res' element={< Result />} />
 			</Routes>
 		</Suspense>
 	);
