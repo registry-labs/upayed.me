@@ -1,5 +1,10 @@
 import { requestTransfer } from '@nfid/wallet';
 import { decimalsToE8s } from './validationHelper';
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
+import { useWeb3Modal } from '@web3modal/wagmi/react'
+import { WagmiConfig } from 'wagmi'
+import { arbitrum, mainnet } from 'wagmi/chains';
+
 
 // ICP
 export async function handlePlugTransaction(to: string, amount: string) {
@@ -76,4 +81,12 @@ export async function handleMetamaskTransaction(to: string, amount: string) {
 	});
 
 	return result.toString();
+}
+
+export async function handleWalletConnectTransaction(to: string, amount: string) {
+	// show popup if on web.
+	// connect with wallet if on mobile
+	// initiate tx
+	const { open } = useWeb3Modal();
+	open();
 }

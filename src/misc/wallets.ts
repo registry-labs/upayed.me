@@ -6,7 +6,8 @@ import metamask from 'src/assets/images/wallets/metamask.png';
 import coinbase from 'src/assets/images/wallets/coinbase.png';
 import ledger from 'src/assets/images/wallets/ledger.png';
 import trezor from 'src/assets/images/wallets/trezor.png';
-import { handleMetamaskTransaction, handleNfidTransaction, handlePlugTransaction } from '@helpers/transactionHelper';
+import wc from 'src/assets/images/wallets/wc.png';
+import { handleMetamaskTransaction, handleWalletConnectTransaction, handleNfidTransaction, handlePlugTransaction } from '@helpers/transactionHelper';
 
 export interface Wallet {
 	name: string;
@@ -27,12 +28,12 @@ export const wallets: ChainWallets[] = [
 				name: 'MetaMask',
 				logo: metamask,
 				handleTransaction: handleMetamaskTransaction
-			}
-			// {
-			// 	name: 'Trust Wallet',
-			// 	logo: trust,
-			// 	handleTransaction: async (to: string, amount: string) => console.log('trust')
-			// },
+			},
+			{
+				name: 'Wallet Connect',
+				logo: wc,
+				handleTransaction: async (to: string, amount: string) => console.log('trust')
+			},
 			// {
 			// 	name: 'Coinbase Wallet',
 			// 	logo: coinbase,
